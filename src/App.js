@@ -1,8 +1,9 @@
+import MainView from "./views/MainView";
 
 function App() {
   return (
     <>
-      <h1>Hola Mundo</h1>
+      <MainView />
     </>
   );
 }
