@@ -13,8 +13,8 @@ const StyledSpan = styled.span`
     display: block;
     border: 1px solid black;
     ${({ alive }) => alive ? css`
-        background: var(-dk--purple)
-        border-color: 'red'
+        background: var(--purple)
+        border-color: var(--purple)
     ` : ""};
 `
 
