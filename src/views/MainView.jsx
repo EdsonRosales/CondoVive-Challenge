@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import './../App.css'
 
 import Grid from '../components/Grid'
 import { gridConstructor } from '../helpers/utils';
@@ -7,7 +8,7 @@ import styled from 'styled-components'
 
 const Title = styled.h1`
     text-align: center;
-    color: #009DD4;
+    color: var(--purple);
     margin: 2rem;
 `
 
@@ -23,7 +24,7 @@ const MainView = () => {
             <Title>
                 Conway's Game of Life (CondoVive Challenge)
             </Title>
-            <Grid grid={[[1, 0, 1, 0], [1, 1, 1, 1]]} />
+            <Grid grid={grid} />
         </>
     )
 }

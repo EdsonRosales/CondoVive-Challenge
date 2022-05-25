@@ -1,5 +1,6 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, {css} from 'styled-components'
+import './../App.css'
 
 /**
  * 
@@ -11,7 +12,10 @@ const StyledSpan = styled.span`
     height: 1.6vmin;
     display: block;
     border: 1px solid black;
-    background: ${({ alive }) => alive ? '#009DD4' : 'black'};
+    ${({ alive }) => alive ? css`
+        background: var(-dk--purple)
+        border-color: 'red'
+    ` : ""};
 `
 
 export default StyledSpan

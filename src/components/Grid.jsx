@@ -1,6 +1,7 @@
 import React from 'react'
 import Cell from './Cell'
 import styled from 'styled-components'
+import './../App.css'
 
 /**
  * 
