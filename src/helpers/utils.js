@@ -13,4 +13,37 @@ export const gridConstructor = (size) => {
     }
 
     return baseGrid
-}
+};
+
+/**
+ * 
+ * @param {number} min 
+ * @param {number} max 
+ * @param {number} value 
+ * @returns the limit of each cell to apply the rules of the game
+ */
+const inLimit = (min, max, value) => Math.min(Math.max(min, value), max);
+export const checkNeighbors = ({ row, column, grid }) => {
+    let count = 0;
+
+    const min = 0;
+    const max = grid.length - 1;
+
+    const minRow = inLimit(min, max, row - 1);
+    const maxRow = inLimit(min, max, row + 1);
+
+    const minColumn = inLimit(min, max, column - 1);
+    const maxColumn = inLimit(min, max, column + 1);
+
+    for (let nRow = minRow; nRow <= maxRow; nRow += 1) {
+        for (let nColumn = minColumn; nColumn <= maxColumn; nColumn += 1) {
+            count += grid[nRow][nColumn];
+        }
+    }
+
+    count -= grid[row][column];
+
+    return count;
+};
+
+export const deepClone = (matrix) => matrix.map(array => [...array]);

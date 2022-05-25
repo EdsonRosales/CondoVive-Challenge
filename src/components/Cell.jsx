@@ -8,13 +8,17 @@ import './../App.css'
  */
 
 const StyledSpan = styled.span`
-    width: 1.6vmin;
-    height: 1.6vmin;
+    --size: ${({ gridSize }) => 80 / gridSize}vmin;
+    width: var(--size);
+    height: var(--size);
     display: block;
-    border: 1px solid black;
+    border: 1px solid #FFFFFF44;
+    background: transparent;
+    transition-duration: 0s;
+
     ${({ alive }) => alive ? css`
-        background: var(--purple)
-        border-color: var(--purple)
+        background: var(--purple);
+        border-color: var(--purple);
     ` : ""};
 `
 
