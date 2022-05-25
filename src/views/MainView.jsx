@@ -29,6 +29,7 @@ const StyledButton = styled.button`
 `;
 
 const gridSize = 20;
+const speed = 1000; //<---Transition speed of life cycle of each cell 
 
 const MainView = () => {
 
@@ -73,6 +74,34 @@ const MainView = () => {
         },
         []
     );
+
+    useEffect(() => {
+        setGridGeneration(n => n + 1);
+
+        const newGrid = deepClone(grid);
+        for (let row = 0; row < grid.length; row += 1) {
+            for (let column = 0; column < grid.length; column += 1) {
+                const current = grid[row][column];
+                const many = checkNeighbors({ row, column, grid });
+                const isAlive = Number(many === 3 || (many === 2 && current));
+
+                newGrid[row][column] = isAlive;
+            }
+            
+        }
+        if (playing) {
+            setGridGeneration(n => n + 1);
+        }
+        const clear = setTimeout(() => {
+            setGrid(
+                newGrid
+            );
+        }, speed);
+
+        return () => {
+            clearTimeout(clear);
+        };
+    }, [grid])
 
     return (
         <>
