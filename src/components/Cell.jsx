@@ -22,4 +22,18 @@ const StyledSpan = styled.span`
     ` : ""};
 `
 
-export default StyledSpan
+const Cell = ({ alive, playing, clicking, setGrid, row, column, grid }) => {
+    const updateCell = () => {
+        if (clicking && !playing && !grid[row][column]) {
+            setGrid(prevGrid => {
+                const newGrid = [...prevGrid];
+                newGrid[row][column] = 1;
+                return newGrid;
+            });
+        }
+    };
+
+    return (<StyledSpan onMouseMove={updateCell} gridSize={grid.length} alive={alive} onClick={updateCell} />);
+};
+
+export default Cell

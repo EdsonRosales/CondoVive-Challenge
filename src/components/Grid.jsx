@@ -36,6 +36,13 @@ const Grid = ({ grid, setGrid, playing }) => {
                             row.map((value, cellIndex) =>
                                 <Cell
                                     alive={value}
+                                    grid={grid}
+                                    playing={playing}
+                                    key={`${rowIndex}-${cellIndex}`}
+                                    clicking={clicking}
+                                    row={rowIndex}
+                                    column={cellIndex}
+                                    setGrid={setGrid}
                                 />
                             )
                         }
