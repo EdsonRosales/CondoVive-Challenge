@@ -34,6 +34,45 @@ const MainView = () => {
 
     //State to generate a new grid
     const [grid, setGrid] = useState(gridConstructor(gridSize))
+    const [gridGeneration, setGridGeneration] = useState(-2);
+
+    const checkGrid = () => {
+
+    };
+
+    //Build a new grid template
+    useEffect(
+        () => {
+            setGrid(
+                (prevGrid) => {
+                    const newGrid = [...prevGrid];
+
+                    newGrid[0][1] = 1;
+                    newGrid[1][2] = 1;
+                    newGrid[2][0] = 1;
+                    newGrid[2][1] = 1;
+                    newGrid[2][2] = 1;
+
+                    newGrid[gridSize - 1][2] = 1;
+                    newGrid[gridSize - 2][1] = 1;
+                    newGrid[gridSize - 3][0] = 1;
+                    newGrid[gridSize - 3][1] = 1;
+                    newGrid[gridSize - 4][2] = 1;
+
+                    newGrid[12][18] = 1;
+                    newGrid[12][19] = 1;
+                    newGrid[12][13] = 1;
+                    newGrid[13][15] = 1;
+                    newGrid[12][12] = 1;
+
+                    return newGrid;
+                }
+            );
+
+            setTimeout(checkGrid, speed);
+        },
+        []
+    );
 
     return (
         <>
