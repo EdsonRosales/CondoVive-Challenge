@@ -11,7 +11,7 @@ const StyledSpan = styled.span`
     height: 1.6vmin;
     display: block;
     border: 1px solid black;
-    background: ${({ alive }) => alive ? '#009DD4' : transparent};
+    background: ${({ alive }) => alive ? '#009DD4' : 'black'};
 `
 
 export default StyledSpan
