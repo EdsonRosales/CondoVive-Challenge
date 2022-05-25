@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './../App.css'
 
 import Grid from '../components/Grid'
-import { gridConstructor } from '../helpers/utils';
+import { gridConstructor, checkNeighbors, deepClone } from '../helpers/utils';
 
 import styled from 'styled-components'
 
