@@ -26,7 +26,7 @@ const Grid = ({ grid, setGrid, playing }) => {
 
 
     return (
-        <StyledMain ref={element}>
+        <StyledMain ref={element} onMouseDown={(e) => { e.preventDefault(); setClick(true); }} onMouseUp={() => setClick(false)}>
             {/* Iteration of the main grid, each grid returns a row */}
             {
                 grid.map((row, rowIndex) =>

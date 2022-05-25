@@ -35,81 +35,42 @@ const MainView = () => {
 
     //State to generate a new grid
     const [grid, setGrid] = useState(gridConstructor(gridSize))
-    const [gridGeneration, setGridGeneration] = useState(-2);
+    const [playing, setPlay] = useState(false);
 
-    const checkGrid = () => {
-
-    };
-
-    //Build a new grid template
     useEffect(
         () => {
-            setGrid(
-                (prevGrid) => {
-                    const newGrid = [...prevGrid];
+            if (!playing) return;
 
-                    newGrid[0][1] = 1;
-                    newGrid[1][2] = 1;
-                    newGrid[2][0] = 1;
-                    newGrid[2][1] = 1;
-                    newGrid[2][2] = 1;
+            const newGrid = deepClone(grid);
 
-                    newGrid[gridSize - 1][2] = 1;
-                    newGrid[gridSize - 2][1] = 1;
-                    newGrid[gridSize - 3][0] = 1;
-                    newGrid[gridSize - 3][1] = 1;
-                    newGrid[gridSize - 4][2] = 1;
+            for (let row = 0; row < grid.length; row += 1) {
+                for (let column = 0; column < grid.length; column += 1) {
+                    const current = grid[row][column];
+                    const many = checkNeighbors({ row, column, grid });
+                    const isAlive = Number(many === 3 || (many === 2 && current));
 
-                    newGrid[12][18] = 1;
-                    newGrid[12][19] = 1;
-                    newGrid[12][13] = 1;
-                    newGrid[13][15] = 1;
-                    newGrid[12][12] = 1;
-
-                    return newGrid;
+                    newGrid[row][column] = isAlive;
                 }
-            );
-
-            setTimeout(checkGrid, speed);
-        },
-        []
-    );
-
-    useEffect(() => {
-        setGridGeneration(n => n + 1);
-
-        const newGrid = deepClone(grid);
-        for (let row = 0; row < grid.length; row += 1) {
-            for (let column = 0; column < grid.length; column += 1) {
-                const current = grid[row][column];
-                const many = checkNeighbors({ row, column, grid });
-                const isAlive = Number(many === 3 || (many === 2 && current));
-
-                newGrid[row][column] = isAlive;
             }
-            
-        }
-        if (playing) {
-            setGridGeneration(n => n + 1);
-        }
-        const clear = setTimeout(() => {
-            setGrid(
-                newGrid
-            );
-        }, speed);
 
-        return () => {
-            clearTimeout(clear);
-        };
-    }, [grid])
+            const clear = setTimeout(() => {
+                setGrid(newGrid);
+            }, speed);
+
+            return () => {
+                clearTimeout(clear);
+            };
+        }
+        , [grid, playing]
+    );
 
     return (
         <>
             <Title>
                 Conway's Game of Life (CondoVive Challenge)
             </Title>
-            <Grid grid={grid} />
-            <StyledButton>Play</StyledButton>
+            <Grid grid={grid} setGrid={setGrid} playing={playing} />
+            <StyledButton onClick={() => setPlay(true)}>Play</StyledButton>
         </>
     )
 }
