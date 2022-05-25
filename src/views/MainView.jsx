@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 import Grid from '../components/Grid'
+import { gridConstructor } from '../helpers/utils';
 
 import styled from 'styled-components'
 
@@ -15,20 +16,7 @@ const gridSize = 50;
 const MainView = () => {
 
     //State to generate a new grid
-    const [grid, setGrid] = useState([])
-
-    //This effect helps me to fill the grid when the component is starting
-    useEffect(() => {
-
-        const baseGrid = []
-
-        for (let row = 0; row < gridSize; row+=1) {
-            for (let column = 0; column < gridSize; column+=1) {
-
-            }
-        }
-    }, [])
-    
+    const [grid, setGrid] = useState(gridConstructor(50))
 
     return (
         <>
